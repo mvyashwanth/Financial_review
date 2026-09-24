@@ -3,7 +3,9 @@ import {createRoot} from "react-dom/client";
 import {LayoutDashboard,ReceiptText,ChartNoAxesCombined,Flag,MessageSquare,Search,RefreshCw,ArrowUpRight,ArrowDownRight,X} from "lucide-react";
 import "./styles.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API =
+  import.meta.env.VITE_API_URL ||
+  "https://financial-review-nf6w.vercel.app/api";
 const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
 const pct=(n,d)=>d?((n/d)*100).toFixed(1)+"%":"—";
 
