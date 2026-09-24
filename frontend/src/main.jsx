@@ -3,7 +3,7 @@ import {createRoot} from "react-dom/client";
 import {LayoutDashboard,ReceiptText,ChartNoAxesCombined,Flag,MessageSquare,Search,RefreshCw,ArrowUpRight,ArrowDownRight,X} from "lucide-react";
 import "./styles.css";
 
-const API="http://localhost:5000/api";
+const API = import.meta.env.VITE_API_URL;
 const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
 const pct=(n,d)=>d?((n/d)*100).toFixed(1)+"%":"—";
 
