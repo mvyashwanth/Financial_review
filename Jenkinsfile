@@ -9,12 +9,12 @@ pipeline {
             }
         }
 
-        stage('Setup Python') {
-            steps {
-                bat 'python --version'
-                bat 'pip --version'
-            }
-        }
+       stage('Setup Python') {
+    steps {
+        bat '"C:\\Users\\yashwanth\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" --version'
+        bat '"C:\\Users\\yashwanth\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip --version'
+    }
+}
 
         stage('Install Dependencies') {
             steps {
