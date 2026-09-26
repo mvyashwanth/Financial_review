@@ -1,8 +1,3 @@
-
-Your Jenkinsfile should contain **only the Jenkins code**, like this:
-
-:::writing{variant="document" id="41726" title="Jenkinsfile"}
-
 pipeline {
     agent any
 
