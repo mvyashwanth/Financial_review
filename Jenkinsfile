@@ -1,4 +1,8 @@
-```groovy
+
+Your Jenkinsfile should contain **only the Jenkins code**, like this:
+
+:::writing{variant="document" id="41726" title="Jenkinsfile"}
+
 pipeline {
     agent any
 
@@ -8,9 +12,11 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Check Files') {
             steps {
-                echo 'Checking out Financial Review...'
+                echo 'Checking project files...'
+                bat 'dir'
+                bat 'dir /s /b'
             }
         }
 
@@ -23,34 +29,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat "\"%PYTHON%\" -m pip install -r backend\\requirements.txt"
+                bat "\"%PYTHON%\" -m pip install -r requirements.txt"
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-
-                // If you have pytest:
-                // bat "\"%PYTHON%\" -m pytest"
-
-                echo 'Tests completed.'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building Financial Review...'
-
-                // Add your actual build command here
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying Financial Review...'
-
-                // Add deployment commands here
             }
         }
     }
@@ -61,8 +58,7 @@ pipeline {
         }
 
         failure {
-            echo 'Financial Review pipeline failed.'
+            echo 'Financial Review pipeline failed!'
         }
     }
 }
-```
