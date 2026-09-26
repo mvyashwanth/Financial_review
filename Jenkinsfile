@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -11,7 +12,6 @@ pipeline {
             steps {
                 echo 'Checking project files...'
                 bat 'dir'
-                bat 'dir /s /b'
             }
         }
 
@@ -22,38 +22,64 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Python Dependencies') {
             steps {
+                echo 'Installing Python dependencies...'
+
                 bat "\"%PYTHON%\" -m pip install -r requirements.txt"
             }
         }
 
-        stage('Test') {
+        stage('Test Backend') {
             steps {
-                echo 'Running tests...'
+                echo 'Running backend tests...'
+
+                bat "\"%PYTHON%\" -m pytest backend\\tests -v"
             }
         }
 
-        stage('Build') {
+        stage('Setup Node') {
             steps {
-                echo 'Building Financial Review...'
+                echo 'Checking Node.js...'
+
+                bat 'node --version'
+                bat 'npm --version'
+            }
+        }
+
+        stage('Install Frontend Dependencies') {
+            steps {
+                echo 'Installing frontend dependencies...'
+
+                bat 'cd frontend && npm ci'
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                echo 'Building React frontend...'
+
+                bat 'cd frontend && npm run build'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying Financial Review...'
+                echo 'Deploy stage...'
+
+                // Add your deployment command here
             }
         }
     }
 
     post {
         success {
-            echo 'Financial Review pipeline completed successfully!'
+            echo 'Financial Review CI/CD pipeline completed successfully!'
         }
 
         failure {
-            echo 'Financial Review pipeline failed!'
+            echo 'Financial Review CI/CD pipeline failed!'
         }
     }
 }
+```
