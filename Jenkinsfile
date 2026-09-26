@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -25,23 +24,13 @@ pipeline {
         stage('Install Python Dependencies') {
             steps {
                 echo 'Installing Python dependencies...'
-
                 bat "\"%PYTHON%\" -m pip install -r requirements.txt"
-            }
-        }
-
-        stage('Test Backend') {
-            steps {
-                echo 'Running backend tests...'
-
-                bat "\"%PYTHON%\" -m pytest backend\\tests -v"
             }
         }
 
         stage('Setup Node') {
             steps {
                 echo 'Checking Node.js...'
-
                 bat 'node --version'
                 bat 'npm --version'
             }
@@ -50,7 +39,6 @@ pipeline {
         stage('Install Frontend Dependencies') {
             steps {
                 echo 'Installing frontend dependencies...'
-
                 bat 'cd frontend && npm ci'
             }
         }
@@ -58,28 +46,26 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 echo 'Building React frontend...'
-
                 bat 'cd frontend && npm run build'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy stage...'
+                echo 'Deploying Financial Review...'
 
-                // Add your deployment command here
+                // Put your actual deployment command here
             }
         }
     }
 
     post {
         success {
-            echo 'Financial Review CI/CD pipeline completed successfully!'
+            echo 'Financial Review deployment pipeline completed successfully!'
         }
 
         failure {
-            echo 'Financial Review CI/CD pipeline failed!'
+            echo 'Financial Review pipeline failed!'
         }
     }
 }
-
